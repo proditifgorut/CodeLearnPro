@@ -1,11 +1,32 @@
+import { supabase } from './supabaseClient.js';
+
+// Function to check auth status and update UI
+async function checkAuthStatus() {
+    const loginBtn = document.getElementById('login-btn');
+    const dashboardBtn = document.getElementById('dashboard-btn');
+    const { data: { session } } = await supabase.auth.getSession();
+
+    if (session) {
+        // User is logged in
+        if (loginBtn) loginBtn.style.display = 'none';
+        if (dashboardBtn) dashboardBtn.style.display = 'inline-flex';
+    } else {
+        // User is not logged in
+        if (loginBtn) loginBtn.style.display = 'inline-flex';
+        if (dashboardBtn) dashboardBtn.style.display = 'none';
+    }
+}
+
 // Mobile Menu Toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
+const navActions = document.querySelector('.nav-actions');
 
 if (hamburger && navMenu) {
   hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
+    if (navActions) navActions.classList.toggle('active'); // Toggle actions as well
   });
 
   // Close menu when clicking on a link
@@ -13,6 +34,7 @@ if (hamburger && navMenu) {
     link.addEventListener('click', () => {
       hamburger.classList.remove('active');
       navMenu.classList.remove('active');
+      if (navActions) navActions.classList.remove('active');
     });
   });
 }
@@ -49,6 +71,7 @@ function contactWhatsApp(service = '') {
   // Open in new tab
   window.open(whatsappURL, '_blank');
 }
+window.contactWhatsApp = contactWhatsApp; // Make it globally accessible
 
 // Form Submission Handler
 const contactForm = document.querySelector('.contact-form form');
@@ -57,7 +80,6 @@ if (contactForm) {
     e.preventDefault();
     
     // Get form data
-    const formData = new FormData(this);
     const name = this.querySelector('input[type="text"]').value;
     const email = this.querySelector('input[type="email"]').value;
     const phone = this.querySelector('input[type="tel"]').value;
@@ -233,8 +255,10 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, observerOptions);
 
-// Apply animation to cards
+// Initialize on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
+  checkAuthStatus(); // Check login status
+
   // Add initial styles for animation
   const animatedElements = document.querySelectorAll('.feature-card, .course-card, .service-card, .pricing-card');
   
@@ -252,152 +276,14 @@ document.addEventListener('DOMContentLoaded', () => {
 // Course Video Links Click Tracking
 document.querySelectorAll('.video-link').forEach(link => {
   link.addEventListener('click', function(e) {
-    // Track video click for analytics (if needed)
     const videoTitle = this.textContent.trim();
     console.log(`Video clicked: ${videoTitle}`);
-    
-    // Optional: Show notification
     showNotification(`Membuka video: ${videoTitle}`, 'info');
   });
 });
 
-// Search Functionality (if needed later)
-function initializeSearch() {
-  const searchInput = document.querySelector('#search-input');
-  const searchResults = document.querySelector('#search-results');
-  
-  if (searchInput && searchResults) {
-    searchInput.addEventListener('input', function() {
-      const query = this.value.toLowerCase();
-      
-      if (query.length < 3) {
-        searchResults.innerHTML = '';
-        return;
-      }
-      
-      // Search through courses and services
-      const courses = document.querySelectorAll('.course-card h3');
-      const services = document.querySelectorAll('.service-card h3');
-      const results = [];
-      
-      courses.forEach(course => {
-        if (course.textContent.toLowerCase().includes(query)) {
-          results.push({
-            title: course.textContent,
-            type: 'Kursus',
-            link: '#courses'
-          });
-        }
-      });
-      
-      services.forEach(service => {
-        if (service.textContent.toLowerCase().includes(query)) {
-          results.push({
-            title: service.textContent,
-            type: 'Layanan',
-            link: '#services'
-          });
-        }
-      });
-      
-      // Display results
-      if (results.length > 0) {
-        searchResults.innerHTML = results.map(result => `
-          <div class="search-result">
-            <a href="${result.link}">
-              <strong>${result.title}</strong>
-              <span class="result-type">${result.type}</span>
-            </a>
-          </div>
-        `).join('');
-      } else {
-        searchResults.innerHTML = '<div class="no-results">Tidak ada hasil ditemukan</div>';
-      }
-    });
-  }
-}
-
-// Price Calculator (if needed)
-function calculatePrice(serviceType, features = []) {
-  const basePrices = {
-    'toko-online': 2500000,
-    'company-profile': 1500000,
-    'restaurant': 1800000,
-    'education': 3000000,
-    'blog': 2000000,
-    'mobile-app': 5000000
-  };
-  
-  const featurePrices = {
-    'payment-gateway': 1000000,
-    'admin-dashboard': 800000,
-    'mobile-responsive': 500000,
-    'seo-optimization': 300000,
-    'social-integration': 200000,
-    'multilanguage': 600000
-  };
-  
-  let basePrice = basePrices[serviceType] || 0;
-  let additionalPrice = features.reduce((total, feature) => {
-    return total + (featurePrices[feature] || 0);
-  }, 0);
-  
-  return basePrice + additionalPrice;
-}
-
-// Local Storage for User Preferences
-function saveUserPreference(key, value) {
-  try {
-    localStorage.setItem(`codelearnpro_${key}`, JSON.stringify(value));
-  } catch (e) {
-    console.warn('Unable to save user preference:', e);
-  }
-}
-
-function getUserPreference(key, defaultValue = null) {
-  try {
-    const stored = localStorage.getItem(`codelearnpro_${key}`);
-    return stored ? JSON.parse(stored) : defaultValue;
-  } catch (e) {
-    console.warn('Unable to get user preference:', e);
-    return defaultValue;
-  }
-}
-
-// Initialize user preferences on page load
-document.addEventListener('DOMContentLoaded', () => {
-  // Load saved preferences
-  const savedTheme = getUserPreference('theme', 'light');
-  const savedLanguage = getUserPreference('language', 'id');
-  
-  // Apply preferences if needed
-  if (savedTheme === 'dark') {
-    document.body.classList.add('dark-theme');
-  }
-});
-
-// Error Handling
-window.addEventListener('error', function(e) {
-  console.error('JavaScript Error:', e.error);
-  // Optionally show user-friendly error message
-  // showNotification('Terjadi kesalahan. Silakan refresh halaman.', 'error');
-});
-
-// Performance Monitoring
-if ('performance' in window) {
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      const perfData = performance.getEntriesByType('navigation')[0];
-      console.log('Page Load Time:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
-    }, 0);
-  });
-}
-
-// Export functions for global use
+// Export functions for global use if they are called from HTML onclick
 window.CodeLearnPro = {
   contactWhatsApp,
   showNotification,
-  calculatePrice,
-  saveUserPreference,
-  getUserPreference
 };

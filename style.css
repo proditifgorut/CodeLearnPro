@@ -106,6 +106,12 @@ body {
   width: 100%;
 }
 
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 .hamburger {
   display: none;
   flex-direction: column;
@@ -861,8 +867,21 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .nav-menu {
+  .nav-menu, .nav-actions {
     display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    padding: 1rem;
+    box-shadow: var(--shadow-md);
+    gap: 1rem;
+  }
+  
+  .nav-menu.active, .nav-actions.active {
+    display: flex;
   }
   
   .hamburger {

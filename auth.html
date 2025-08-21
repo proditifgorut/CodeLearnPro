@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - CodeLearn Pro</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth-styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body class="auth-page">
@@ -41,7 +42,6 @@
                 <div class="form-options">
                     <label class="checkbox-container">
                         <input type="checkbox" name="remember">
-                        <span class="checkmark"></span>
                         Ingat saya
                     </label>
                     <a href="#" class="forgot-password">Lupa password?</a>
@@ -98,7 +98,6 @@
                 </div>
                 <label class="checkbox-container">
                     <input type="checkbox" name="terms" required>
-                    <span class="checkmark"></span>
                     Saya setuju dengan <a href="#" class="terms-link">Syarat dan Ketentuan</a>
                 </label>
                 <button type="submit" class="auth-btn">
@@ -139,6 +138,6 @@
         </div>
     </div>
 
-    <script src="auth.js"></script>
+    <script src="auth.js" type="module"></script>
 </body>
 </html>
