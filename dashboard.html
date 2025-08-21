@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - CodeLearn Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="dashboard-page">
+    <!-- Dashboard Sidebar -->
+    <aside class="dashboard-sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <i class="fas fa-code"></i>
+                <span>CodeLearn Pro</span>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="#overview" class="nav-item active" onclick="showSection('overview')">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Overview</span>
+                </a></li>
+                <li><a href="#my-courses" class="nav-item" onclick="showSection('my-courses')">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Kursus Saya</span>
+                </a></li>
+                <li><a href="#progress" class="nav-item" onclick="showSection('progress')">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Progress</span>
+                </a></li>
+                <li><a href="#certificates" class="nav-item" onclick="showSection('certificates')">
+                    <i class="fas fa-certificate"></i>
+                    <span>Sertifikat</span>
+                </a></li>
+                <li><a href="#projects" class="nav-item" onclick="showSection('projects')">
+                    <i class="fas fa-folder-open"></i>
+                    <span>Proyek</span>
+                </a></li>
+                <li><a href="#profile" class="nav-item" onclick="showSection('profile')">
+                    <i class="fas fa-user"></i>
+                    <span>Profil</span>
+                </a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="logout-btn" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Keluar</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Dashboard Main Content -->
+    <main class="dashboard-main">
+        <!-- Dashboard Header -->
+        <header class="dashboard-header">
+            <div class="header-left">
+                <button class="sidebar-toggle" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="breadcrumb">
+                    <span id="current-section">Dashboard</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="notification-btn" onclick="toggleNotifications()">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <div class="user-menu">
+                    <div class="user-avatar">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="User Avatar" id="user-avatar">
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name" id="user-name">John Doe</span>
+                        <span class="user-role">Premium Member</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <!-- Overview Section -->
+            <section id="overview-section" class="content-section active">
+                <div class="section-header">
+                    <h1>Selamat Datang Kembali!</h1>
+                    <p>Lanjutkan perjalanan coding Anda hari ini</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>5</h3>
+                            <p>Kursus Aktif</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>3</h3>
+                            <p>Sertifikat</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>24</h3>
+                            <p>Jam Belajar</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>12</h3>
+                            <p>Proyek Selesai</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-cards">
+                    <div class="card recent-activity">
+                        <div class="card-header">
+                            <h3>Aktivitas Terbaru</h3>
+                            <a href="#" class="view-all">Lihat Semua</a>
+                        </div>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-video"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p><strong>Menyelesaikan video</strong> "JavaScript ES6 Features"</p>
+                                    <span class="activity-time">2 jam yang lalu</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p><strong>Menyelesaikan proyek</strong> "Todo App dengan React"</p>
+                                    <span class="activity-time">1 hari yang lalu</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p><strong>Mendapat sertifikat</strong> "HTML & CSS Fundamental"</p>
+                                    <span class="activity-time">3 hari yang lalu</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card continue-learning">
+                        <div class="card-header">
+                            <h3>Lanjutkan Belajar</h3>
+                        </div>
+                        <div class="continue-course">
+                            <div class="course-thumbnail">
+                                <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=200&h=120&fit=crop" alt="React Course">
+                            </div>
+                            <div class="course-info">
+                                <h4>React.js Development</h4>
+                                <p>Bab 4: State Management dengan Redux</p>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 65%"></div>
+                                </div>
+                                <span class="progress-text">65% Selesai</span>
+                            </div>
+                            <button class="continue-btn">
+                                <i class="fas fa-play"></i>
+                                Lanjutkan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- My Courses Section -->
+            <section id="my-courses-section" class="content-section">
+                <div class="section-header">
+                    <h1>Kursus Saya</h1>
+                    <p>Kelola dan pantau progress kursus Anda</p>
+                </div>
+
+                <div class="course-filters">
+                    <button class="filter-btn active" onclick="filterCourses('all')">Semua</button>
+                    <button class="filter-btn" onclick="filterCourses('ongoing')">Sedang Berjalan</button>
+                    <button class="filter-btn" onclick="filterCourses('completed')">Selesai</button>
+                    <button class="filter-btn" onclick="filterCourses('not-started')">Belum Dimulai</button>
+                </div>
+
+                <div class="my-courses-grid">
+                    <div class="my-course-card" data-status="ongoing">
+                        <div class="course-thumbnail">
+                            <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=300&h=200&fit=crop" alt="React Course">
+                            <div class="course-progress-overlay">
+                                <div class="progress-circle" data-progress="65">
+                                    <span>65%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-content">
+                            <h3>React.js Development</h3>
+                            <p>Membangun aplikasi web modern dengan React</p>
+                            <div class="course-stats">
+                                <span><i class="fas fa-video"></i> 24/45 Video</span>
+                                <span><i class="fas fa-clock"></i> 8 jam tersisa</span>
+                            </div>
+                            <button class="course-action-btn">
+                                <i class="fas fa-play"></i>
+                                Lanjutkan Belajar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="my-course-card" data-status="completed">
+                        <div class="course-thumbnail">
+                            <img src="https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=300&h=200&fit=crop" alt="HTML CSS Course">
+                            <div class="course-badge completed">
+                                <i class="fas fa-check"></i>
+                                Selesai
+                            </div>
+                        </div>
+                        <div class="course-content">
+                            <h3>HTML & CSS Fundamental</h3>
+                            <p>Dasar-dasar web development yang wajib dikuasai</p>
+                            <div class="course-stats">
+                                <span><i class="fas fa-video"></i> 20/20 Video</span>
+                                <span><i class="fas fa-certificate"></i> Tersertifikasi</span>
+                            </div>
+                            <button class="course-action-btn secondary">
+                                <i class="fas fa-download"></i>
+                                Unduh Sertifikat
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="my-course-card" data-status="not-started">
+                        <div class="course-thumbnail">
+                            <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=300&h=200&fit=crop" alt="Backend Course">
+                            <div class="course-badge new">
+                                Baru
+                            </div>
+                        </div>
+                        <div class="course-content">
+                            <h3>Backend Development</h3>
+                            <p>Node.js, Express, dan database untuk backend</p>
+                            <div class="course-stats">
+                                <span><i class="fas fa-video"></i> 0/50 Video</span>
+                                <span><i class="fas fa-clock"></i> 20 jam estimasi</span>
+                            </div>
+                            <button class="course-action-btn">
+                                <i class="fas fa-play"></i>
+                                Mulai Belajar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Progress Section -->
+            <section id="progress-section" class="content-section">
+                <div class="section-header">
+                    <h1>Progress Pembelajaran</h1>
+                    <p>Pantau perkembangan skill coding Anda</p>
+                </div>
+
+                <div class="progress-overview">
+                    <div class="progress-card">
+                        <h3>Progress Keseluruhan</h3>
+                        <div class="large-progress-circle" data-progress="73">
+                            <span>73%</span>
+                        </div>
+                        <p>Dari 6 kursus yang diambil</p>
+                    </div>
+
+                    <div class="skill-progress">
+                        <h3>Progress per Skill</h3>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Frontend Development</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Backend Development</span>
+                                <span>45%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 45%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Database</span>
+                                <span>60%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>DevOps</span>
+                                <span>30%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 30%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="learning-streak">
+                    <h3>Streak Belajar</h3>
+                    <div class="streak-info">
+                        <div class="streak-number">
+                            <span class="streak-count">7</span>
+                            <span class="streak-unit">hari</span>
+                        </div>
+                        <p>Anda sudah belajar 7 hari berturut-turut! 🔥</p>
+                    </div>
+                    <div class="streak-calendar">
+                        <div class="streak-day completed"></div>
+                        <div class="streak-day completed"></div>
+                        <div class="streak-day completed"></div>
+                        <div class="streak-day completed"></div>
+                        <div class="streak-day completed"></div>
+                        <div class="streak-day completed"></div>
+                        <div class="streak-day completed today"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile-section" class="content-section">
+                <div class="section-header">
+                    <h1>Profil Saya</h1>
+                    <p>Kelola informasi akun dan preferensi Anda</p>
+                </div>
+
+                <div class="profile-content">
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <div class="profile-avatar">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" alt="Profile Picture" id="profile-picture">
+                                <button class="avatar-upload-btn">
+                                    <i class="fas fa-camera"></i>
+                                </button>
+                            </div>
+                            <div class="profile-info">
+                                <h2 id="profile-name">John Doe</h2>
+                                <p id="profile-email">john.doe@email.com</p>
+                                <span class="profile-badge">Premium Member</span>
+                            </div>
+                        </div>
+
+                        <form class="profile-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="first-name">Nama Depan</label>
+                                    <input type="text" id="first-name" value="John" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="last-name">Nama Belakang</label>
+                                    <input type="text" id="last-name" value="Doe" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-email-input">Email</label>
+                                <input type="email" id="profile-email-input" value="john.doe@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone-number">Nomor WhatsApp</label>
+                                <input type="tel" id="phone-number" value="08123456789" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bio">Bio</label>
+                                <textarea id="bio" rows="4" placeholder="Ceritakan sedikit tentang diri Anda...">Seorang developer yang passionate dalam teknologi web dan mobile development.</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="github-url">GitHub Profile</label>
+                                <input type="url" id="github-url" placeholder="https://github.com/username">
+                            </div>
+                            <div class="form-group">
+                                <label for="linkedin-url">LinkedIn Profile</label>
+                                <input type="url" id="linkedin-url" placeholder="https://linkedin.com/in/username">
+                            </div>
+                            <button type="submit" class="update-profile-btn">
+                                <i class="fas fa-save"></i>
+                                Simpan Perubahan
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Notification Panel -->
+    <div class="notification-panel" id="notification-panel">
+        <div class="notification-header">
+            <h3>Notifikasi</h3>
+            <button class="close-notifications" onclick="toggleNotifications()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="notification-list">
+            <div class="notification-item unread">
+                <div class="notification-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <div class="notification-content">
+                    <p><strong>Sertifikat Baru!</strong></p>
+                    <p>Anda telah menyelesaikan kursus HTML & CSS</p>
+                    <span class="notification-time">1 jam yang lalu</span>
+                </div>
+            </div>
+            <div class="notification-item">
+                <div class="notification-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <div class="notification-content">
+                    <p><strong>Video Baru Tersedia</strong></p>
+                    <p>React Hooks Advanced di kursus React.js</p>
+                    <span class="notification-time">2 jam yang lalu</span>
+                </div>
+            </div>
+            <div class="notification-item">
+                <div class="notification-icon">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <div class="notification-content">
+                    <p><strong>Promo Spesial!</strong></p>
+                    <p>Diskon 50% untuk kursus Backend Development</p>
+                    <span class="notification-time">1 hari yang lalu</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
